@@ -41,8 +41,20 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client) {
     });
   });
 
+  server.delete('/api/whiskys', function(req, res) {
+    db.collection('whiskys').remove({}, function(err, result){
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+        return;
+      }
+      res.status(204);
+      res.send();
+    });
+  });
 
   server.listen(3000, function() {
     console.log("Listeneing on port 3000");
-  })
+  });
 });
